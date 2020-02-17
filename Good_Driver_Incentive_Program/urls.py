@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-app_name = 'GoodDriverIncentive'
+from django.conf.urls import url, include
+from GoodDriverIncentive import views
+#from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^register/$', views.register, name='register'),
-    url(r'^user_login/$', views.user_login, name='user_login'),
+    url(r'^$', views.index, name='index'),
+    url(r'^special/', views.special, name='special'),
+    url(r'^GoodDriverIncentive/', include('GoodDriverIncentive.urls')),
+    url(r'^logout/$', views.user_logout, name='logout'),
+    #path('accounts/', include('GoodDriverIncentive.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')),  #URL pattern for login page (http://webname/accounts)
+    #path('', TemplateView.as_view(template_name='home.html'), name='home'), #URL pattern for homepage
 ]
